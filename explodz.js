@@ -1,11 +1,12 @@
 void(function(STEP, PERSPECTIVE) {
+	var stepDelta = 0.001
 	function traverse(element) {
 		var childNodes = element.childNodes, l = childNodes.length;
 		for (var i = 0; i < l; i++) {
 			var childNode = childNodes[i];
 			if (childNode.nodeType === 1) {
 				childNode.style.WebkitTransformStyle = 'preserve-3d';
-				childNode.style.WebkitTransform = 'translateZ(' + STEP + 'px)';
+				childNode.style.WebkitTransform = 'translateZ(' + (STEP + i * stepDelta).toFixed(3) + 'px)';
 				traverse(childNode);
 			}
 		}
