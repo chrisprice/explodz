@@ -6,7 +6,7 @@ void(function(STEP, PERSPECTIVE) {
 			var childNode = childNodes[i];
 			if (childNode.nodeType === 1) {
 				childNode.style.WebkitTransformStyle = 'preserve-3d';
-				childNode.style.WebkitTransform = 'translateZ(' + (STEP + i * stepDelta).toFixed(3) + 'px)';
+				childNode.style.WebkitTransform = 'translateZ(' + (STEP + (l - i) * stepDelta).toFixed(3) + 'px)';
 				traverse(childNode);
 			}
 		}
