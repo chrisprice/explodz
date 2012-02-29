@@ -5,6 +5,7 @@ void(function(STEP, PERSPECTIVE) {
 		for (var i = 0; i < l; i++) {
 			var childNode = childNodes[i];
 			if (childNode.nodeType === 1) {
+				childNode.style.overflow = 'visible';
 				childNode.style.WebkitTransformStyle = 'preserve-3d';
 				childNode.style.WebkitTransform = 'translateZ(' + (STEP + (l - i) * stepDelta).toFixed(3) + 'px)';
 				traverse(childNode);
