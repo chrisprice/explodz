@@ -14,8 +14,9 @@ void(function(STEP, PERSPECTIVE) {
 	}
 	
 	var body = document.body;
+	body.style.overflow = 'visible';
 	body.style.WebkitTransformStyle = 'preserve-3d';
-	body.style.WebkitPerspective = 5000;
+	body.style.WebkitPerspective = PERSPECTIVE;
 	
 	var xCenter = (window.innerWidth/2).toFixed(2);
 	var yCenter = (window.innerHeight/2).toFixed(2);
@@ -31,4 +32,5 @@ void(function(STEP, PERSPECTIVE) {
 		var ydeg = (xrel * 360 - 180).toFixed(2);
 		body.style.WebkitTransform = "rotateX(" + xdeg + "deg) rotateY(" + ydeg + "deg)";
 	}, true);
+	
 } (25, 5000)); 
