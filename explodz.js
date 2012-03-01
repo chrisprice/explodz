@@ -25,12 +25,29 @@ void(function(STEP, PERSPECTIVE) {
 
 	traverse(body);
 	
+	var mode = "ROTATE";
+	
 	document.addEventListener("mousemove", function (e) {
-		var xrel = e.screenX / screen.width;
-		var yrel = 1 - (e.screenY / screen.height);
-		var xdeg = (yrel * 360 - 180).toFixed(2);
-		var ydeg = (xrel * 360 - 180).toFixed(2);
-		body.style.WebkitTransform = "rotateX(" + xdeg + "deg) rotateY(" + ydeg + "deg)";
+		if (mode === "ROTATE") {
+			var xrel = e.screenX / screen.width;
+			var yrel = 1 - (e.screenY / screen.height);
+			var xdeg = (yrel * 360 - 180).toFixed(2);
+			var ydeg = (xrel * 360 - 180).toFixed(2);
+			body.style.WebkitTransform = "rotateX(" + xdeg + "deg) rotateY(" + ydeg + "deg)";
+		} else if (mode === "PARALLAX") {
+			var xrel = e.screenX / screen.width;
+			var yrel = e.screenY / screen.height;
+			var xpct = ((xrel - 0.5) * 1000 + 50).toFixed(2);
+			var ypct = ((yrel - 0.5) * 1000 + 50).toFixed(2);
+			body.style.WebkitPerspectiveOrigin = xpct + "% " + ypct +"%";
+		}
 	}, true);
+	
+	document.addEventListener("mouseup", function (e) {
+		mode = mode === "ROTATE" ? "PARALLAX" :
+			mode === "PARALLAX" ? "DISABLED" :
+				"ROTATE";
+	}, true);
+	
 	
 } (25, 5000)); 
