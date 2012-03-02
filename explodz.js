@@ -34,18 +34,11 @@ void(function(STEP, PERSPECTIVE) {
 			var xdeg = (yrel * 360 - 180).toFixed(2);
 			var ydeg = (xrel * 360 - 180).toFixed(2);
 			body.style.WebkitTransform = "rotateX(" + xdeg + "deg) rotateY(" + ydeg + "deg)";
-		} else if (mode === "PARALLAX") {
-			var xrel = e.screenX / screen.width;
-			var yrel = e.screenY / screen.height;
-			var xpct = ((xrel - 0.5) * 1000 + 50).toFixed(2);
-			var ypct = ((yrel - 0.5) * 1000 + 50).toFixed(2);
-			body.style.WebkitPerspectiveOrigin = xpct + "% " + ypct +"%";
 		}
 	}, true);
 	
 	document.addEventListener("mouseup", function (e) {
-		mode = mode === "ROTATE" ? "PARALLAX" :
-			mode === "PARALLAX" ? "DISABLED" :
+		mode = mode === "ROTATE" ? "DISABLED" :
 				"ROTATE";
 	}, true);
 	
