@@ -68,14 +68,15 @@ void(function(STEP, PERSPECTIVE) {
 	traverse(body, 0, 0, 0);
 	
 	var faces = document.createElement("DIV");
+	faces.style.display = "none";
 	faces.style.position = "absolute";
 	faces.style.top = 0;
 	faces.innerHTML = facesHTML;
 	body.appendChild(faces);
 
-	var mode = "ROTATE";	
+	var mode = "NO_FACES";	
 	document.addEventListener("mousemove", function (e) {
-		if (mode === "ROTATE") {
+		if (mode !== "DISABLED") {
 			var xrel = e.screenX / screen.width;
 			var yrel = 1 - (e.screenY / screen.height);
 			var xdeg = (yrel * 360 - 180).toFixed(2);
@@ -85,9 +86,16 @@ void(function(STEP, PERSPECTIVE) {
 	}, true);
 	
 	document.addEventListener("mouseup", function (e) {
-		mode = "DISABLED";
-		mode = mode === "ROTATE" ? "DISABLED" :
-				"ROTATE";
+		switch (mode) {
+		case "NO_FACES":
+			mode = "FACES";
+			faces.style.display = "";
+			break;
+		case "FACES":
+			mode = "NO_FACES";
+			faces.style.display = "none";
+			break;
+		}
 	}, true);
 	
 	
